@@ -1,0 +1,40 @@
+{% extends 'crypto/base.html' %}
+
+
+{% block body %}
+    {% if notfound %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+            <div class="alert alert-secondary" role="alert">{{ notfound }}</div>
+        </div>
+    </div>
+    {% else %}
+        {% if crypto.Response %}
+            <div class="row">
+                <div class="col-md-8 offset-md-2 text-center">
+                    <div class="alert alert-danger" role="alert">
+                        {{ crypto.Response }} : {{ crypto.Message }}
+                        <p>Hint: Choose from BTC,ETH,XRP,BCH,EOS,LTC,XLM,ADA,USDT,MIOTA,TRX</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card text-center">
+                    {% for key, value in crypto.DISPLAY.items %}
+                        <h5 class="card-header">{{ key }}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Price: {{ value.USD.PRICE }}</h5>
+                            <p class="card-text">Day High: {{ value.USD.HIGHDAY }}</p>
+                            <p class="">Day Low: {{ value.USD.LOWDAY }}</p>
+                            <p class="">Market Cap: {{ value.USD.MKTCAP }}</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}    
+{% endblock %}

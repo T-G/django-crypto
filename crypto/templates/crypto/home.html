@@ -1,0 +1,62 @@
+{% extends 'crypto/base.html' %}
+{% load static %}
+
+
+{% block title %}Home{% endblock %}
+
+
+{% block body %}
+<div class="bg-light p-5 mt-4 mb-5">
+    <h2 class="display-3">Welcome To Crypto News Network!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis mattis enim, quis rhoncus arcu. Proin euismod hendrerit eros non hendrerit. Nulla semper erat augue, vel dapibus ligula finibus id. Curabitur urna urna, molestie nec lobortis eleifend, porta quis erat. Suspendisse ultricies augue maximus, hendrerit leo eget, lacinia dui. Curabitur at dignissim tortor. Donec non euismod mauris. Suspendisse potenti. Quisque mattis sed urna non lacinia. </p>
+    <button class="btn btn-outline-secondary">Learn More</button>
+</div>
+
+<!-- Get Crypto Currency Price -->
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">24h High</th>
+          <th scope="col">24h Low</th>
+          <th scope="col">Market Cap</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, value in price.DISPLAY.items %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value.USD.PRICE }}</td>
+            <td>{{ value.USD.HIGHDAY }}</td>
+            <td>{{ value.USD.LOWDAY }}</td>
+            <td>{{ value.USD.MKTCAP }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+</table>
+
+<br>
+{{ price }}
+<br>
+
+
+<div class="container">
+    <div class="row">
+        {% for row in api.Data %}
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{ row.imageurl }}" class="card-img-top" alt="{{ row.source }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ row.title}}</h5>
+                        <p class="card-text">{{ row.body }}</p>
+                        <a href="{{ row.url }}" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}        
+    </div>
+</div>
+
+
+{% endblock %}
